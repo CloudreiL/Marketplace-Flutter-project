@@ -12,7 +12,7 @@ class LogPage extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Авторизация'),
+        title: const Text('ChillMart'),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(

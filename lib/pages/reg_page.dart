@@ -8,7 +8,7 @@ class RegForm extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Регистрация'),
+        title: const Text('ChillMart'),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(

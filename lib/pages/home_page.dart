@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phone_project/pages/login_page.dart';
+import 'package:phone_project/pages/product_page.dart';
+
+import 'package:phone_project/components/classes.dart';
 
 class HomePage extends StatelessWidget{
   const HomePage({super.key});
@@ -9,59 +12,63 @@ class HomePage extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Home Page'),
+        title: Text('ChillMart'),
         backgroundColor: Colors.lightBlue,
       ),
-      body:  Column(
-          children: [const Padding(
-            padding: EdgeInsets.only(top:50),
-            child: Center(
-              child: Text(
-                'Welcome!',
-                style: TextStyle(
-                  fontSize: 50,
-                ),
-              ),
-            ),
-          ),
-            const Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: Center(
-                child: Icon(
-                  Icons.ac_unit,
-                  size: 40,
-                ),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(top:30),
-              child: Text(
-                'We have nothing here! :D',
-                style: TextStyle(
-                    fontSize: 30
-                ),
-              ),
-            ),
-            Padding(padding: const EdgeInsets.only(top:30),
-                child: Container(
-                  width: 400,
-                  height: 130,
+      body: Center(
+        child: GridView.builder(
+          itemCount: 14,
+          itemBuilder: (context, index) {
+              return Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const ProductPage(title: '')));
+                    },
+                    child: Container(
+                        width: 200,
+                        height: 260,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.red)
+                        ),
+                      margin: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Image.network(
+                            products[index].photo,
+                            width: 150,
+                            height: 150,
+                          ),
+                          Text(
+                              products[index].cost,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 17)
+                          ),
+                          Text(
+                            products[index].name,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize:15)
+                          )
+                        ],
+                      ),
 
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(255, 180, 153, 236),
-                            Color.fromARGB(255, 0, 183, 255),
-                            Color.fromARGB(150, 0, 176, 255),
-                          ],
-                          tileMode: TileMode.mirror
-                      )
+                    ),
                   ),
-                )
-            ),
-          ]
+
+                ],
+              );
+          },
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 300,
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.lightBlue,

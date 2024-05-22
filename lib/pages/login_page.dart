@@ -10,9 +10,14 @@ class LogPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('ChillMart'),
+        title: Row(
+          children: [
+            Icon(Icons.ac_unit),
+            Text('ChillMart')
+          ],
+        ),
         backgroundColor: Colors.lightBlue,
       ),
       body: Column(

@@ -26,7 +26,7 @@ class _ProductPageState extends State<ProductPage> {
         title: Row(
           children: [
             Icon(Icons.ac_unit),
-            Text('ChillMart')
+            Text('ChillMart'),
           ],
         ),
         backgroundColor: Colors.lightBlue,
@@ -81,7 +81,7 @@ class _ProductPageState extends State<ProductPage> {
                   SizedBox(height: 20), // Отступ перед кнопкой
                   ElevatedButton(
                     onPressed: () {
-                      // Логика добавления в корзину
+
                     },
                     child: Text('В корзину'),
                     style: ElevatedButton.styleFrom(

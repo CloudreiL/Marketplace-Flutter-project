@@ -3,9 +3,7 @@ import 'package:phone_project/pages/home_page.dart';
 import 'package:phone_project/pages/reg_page.dart';
 
 class LogPage extends StatelessWidget {
-  const LogPage({Key? key, required this.title});
-
-  final String title;
+  const LogPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +33,29 @@ class LogPage extends StatelessWidget {
                 'Введите логин и пароль'
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Логин'
               ),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Пароль'
               ),
             ),
-          ),ElevatedButton(
+          ),
+          ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage())
                 );
@@ -65,7 +64,7 @@ class LogPage extends StatelessWidget {
           ),
           TextButton(
               onPressed: (){
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const RegForm())
                 );

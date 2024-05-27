@@ -27,36 +27,37 @@ class RegForm extends StatelessWidget {
                 'Введите данные для регистрации'
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Email'
               ),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Логин'
               ),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Пароль'
               ),
             ),
-          ),ElevatedButton(
+          ),
+          ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },

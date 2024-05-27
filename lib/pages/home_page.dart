@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phone_project/pages/user_page.dart';
 import 'package:phone_project/pages/product_page.dart';
+import 'package:phone_project/pages/cart_page.dart';
+import 'package:phone_project/pages/fav_page.dart';
+
 import 'package:phone_project/components/classes.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,15 +26,13 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 40,
         automaticallyImplyLeading: false,
         title: Row(
           children: [
             Icon(Icons.ac_unit),
-            Text('ChillMart'),
+            Text('ChillMart',)
           ],
         ),
-        backgroundColor: Colors.lightBlue,
       ),
       body: Column(
         children: [
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Поиск...',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                 prefixIcon: Icon(Icons.search),
               ),
               onChanged: (query) {
@@ -71,36 +72,44 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      child: Container(
-                        width: 200,
-                        height: 260,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueGrey),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         margin: EdgeInsets.all(5),
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                filteredProducts[index].photo,
-                                width: 150,
-                                height: 150,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  filteredProducts[index].photo,
+                                  width: 150,
+                                  height: 150,
+                                ),
                               ),
-                            ),
-                            Text(
-                              filteredProducts[index].cost,
-                              textAlign: TextAlign.right,
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            Text(
-                              filteredProducts[index].name,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ],
+                              SizedBox(height: 10),
+                              Text(
+                                filteredProducts[index].cost,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                filteredProducts[index].name,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -125,15 +134,33 @@ class _HomePageState extends State<HomePage> {
           children: [
             IconButton(
               onPressed: () {},
+              icon: const Icon(Icons.home_outlined),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavPage(),
+                  ),
+                );
+              },
               icon: const Icon(Icons.favorite_border),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ),
+                );
+              },
               icon: const Icon(Icons.shopping_basket_outlined),
             ),
             IconButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const UserPage(),

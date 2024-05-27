@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:phone_project/components/classes.dart';
 
+
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key, required this.title, required this.productIndex}) : super(key: key);
 
@@ -29,25 +30,26 @@ class _ProductPageState extends State<ProductPage> {
             Text('ChillMart'),
           ],
         ),
-        backgroundColor: Colors.lightBlue,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CarouselSlider(
-              options: CarouselOptions(height: 300.0),
-              items: product.photos.map((photo) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Image.network(photo),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
+              CarouselSlider(
+                options: CarouselOptions(height: 350.0),
+                items: product.photos.map((photo) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: ClipRRect(
+                          child: Image.network(photo),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -80,13 +82,10 @@ class _ProductPageState extends State<ProductPage> {
                   Text(product.description),
                   SizedBox(height: 20), // Отступ перед кнопкой
                   ElevatedButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('В корзину'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.lightBlueAccent, // Цвет кнопки
-                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10), // Размер кнопки
+                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5), // Размер кнопки
                       textStyle: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

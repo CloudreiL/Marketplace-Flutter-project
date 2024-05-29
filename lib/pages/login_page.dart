@@ -18,63 +18,65 @@ class LogPage extends StatelessWidget {
         ),
         backgroundColor: Colors.lightBlue,
       ),
-      body: Column(
-        children: [const Padding(
-          padding: EdgeInsets.only(top:30),
-          child: Icon(
-              Icons.ac_unit,
-              color: Colors.lightBlue,
-              size: 100
-          ),
-        ),
-          const Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [const Padding(
             padding: EdgeInsets.only(top:30),
-            child: Text(
-                'Введите логин и пароль'
+            child: Icon(
+                Icons.ac_unit,
+                color: Colors.lightBlue,
+                size: 100
             ),
           ),
-           Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                  labelText: 'Логин'
+            const Padding(
+              padding: EdgeInsets.only(top:30),
+              child: Text(
+                  'Введите логин и пароль'
               ),
             ),
-          ),
-           Padding(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                  labelText: 'Пароль'
+             Padding(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                    labelText: 'Логин'
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage())
-                );
-              },
-              child: const Text('Войти')
-          ),
-          TextButton(
-              onPressed: (){
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegForm())
-                );
-              },
-              child: const Text(
-                'Регистрация',
-              )
+             Padding(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                    labelText: 'Пароль'
+                ),
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage())
+                  );
+                },
+                child: const Text('Войти')
+            ),
+            TextButton(
+                onPressed: (){
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegForm())
+                  );
+                },
+                child: const Text(
+                  'Регистрация',
+                )
 
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

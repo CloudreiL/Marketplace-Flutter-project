@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:phone_project/components/classes.dart';
-
+import 'package:phone_project/components/classes.dart';// Импортируем класс Liked для избранного
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key, required this.title, required this.productIndex}) : super(key: key);
@@ -34,22 +32,22 @@ class _ProductPageState extends State<ProductPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-              CarouselSlider(
-                options: CarouselOptions(height: 350.0),
-                items: product.photos.map((photo) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        child: ClipRRect(
-                          child: Image.network(photo),
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
+            CarouselSlider(
+              options: CarouselOptions(height: 350.0),
+              items: product.photos.map((photo) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: ClipRRect(
+                        child: Image.network(photo),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -68,6 +66,17 @@ class _ProductPageState extends State<ProductPage> {
                           onPressed: () {
                             setState(() {
                               isFavorite = !isFavorite;
+                              if (isFavorite) {
+                                Liked.items.add(LikedItem(product.name, product.cost, product.photo));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('${product.name} добавлен в избранное')),
+                                );
+                              } else {
+                                Liked.items.removeWhere((item) => item.name == product.name);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('${product.name} удален из избранного')),
+                                );
+                              }
                             });
                           },
                           icon: Icon(
@@ -82,7 +91,14 @@ class _ProductPageState extends State<ProductPage> {
                   Text(product.description),
                   SizedBox(height: 20), // Отступ перед кнопкой
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        Cart.items.add(CartItem(product.name, product.cost, product.photo));
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${product.name} добавлен в корзину')),
+                      );
+                    },
                     child: Text('В корзину'),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5), // Размер кнопки

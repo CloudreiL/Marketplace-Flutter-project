@@ -112,3 +112,37 @@ List<Products> products = [
   ])
 ];
 
+class Account{
+  static String email = "";
+  static String login = "";
+  static String password = "";
+}
+
+class CartItem {
+  final String name;
+  final String cost;
+  final String photo;
+
+  CartItem(this.name, this.cost, this.photo);
+}
+
+class Cart {
+  static List<CartItem> items = [];
+}
+
+
+class LikedItem {
+  final String name;
+  final String cost;
+  final String photo;
+
+  LikedItem(this.name, this.cost, this.photo);
+}
+
+class Liked {
+  static List<LikedItem> items = [];
+}
+
+
+
+

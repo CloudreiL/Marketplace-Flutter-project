@@ -1,7 +1,14 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:phone_project/components/classes.dart';
+import 'package:phone_project/pages/user_page.dart';
 
 class RegForm extends StatelessWidget {
   const RegForm({super.key});
+
+  static String email = '';
+  static String login = '';
+  static String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +36,23 @@ class RegForm extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(10),
               child: TextField(
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Email',
                 ),
+                onChanged: (value) { email = value; },
               ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
               child: TextField(
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Логин',
                 ),
+                onChanged: (value) { login = value; },
               ),
             ),
             Padding(
@@ -54,11 +63,20 @@ class RegForm extends StatelessWidget {
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   labelText: 'Пароль',
                 ),
+                onChanged: (value) { password = value; },
               ),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => const UserPage(),
+                  ),
+                );
+                Account.email = email;
+                Account.login = login;
+                Account.password = password;
               },
               child: const Text('Регистрация'),
             ),

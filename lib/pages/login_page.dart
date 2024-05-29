@@ -37,7 +37,7 @@ class LogPage extends StatelessWidget {
              Padding(
               padding: EdgeInsets.all(10),
               child: TextField(
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                     labelText: 'Логин'
@@ -73,7 +73,6 @@ class LogPage extends StatelessWidget {
                 child: const Text(
                   'Регистрация',
                 )
-
             )
           ],
         ),

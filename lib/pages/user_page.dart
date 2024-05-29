@@ -5,15 +5,26 @@ import 'package:phone_project/pages/login_page.dart';
 import 'package:phone_project/pages/reg_page.dart';
 import 'package:phone_project/pages/cart_page.dart';
 import 'package:phone_project/pages/fav_page.dart';
+import 'package:phone_project/components/classes.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
 
+  void _logout(BuildContext context) {
+    // Сбрасываем данные аккаунта
+    Account.email = "";
+    Account.login = "";
+    Account.password = "";
+    // Обновляем UI
+    (context as Element).markNeedsBuild();
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = Account.email.isNotEmpty && Account.login.isNotEmpty && Account.password.isNotEmpty;
+
     return Scaffold(
-      body:
-      Column(
+      body: Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: 70, left: 20, right: 20), // Отступы сверху и по бокам
@@ -39,11 +50,43 @@ class UserPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                      Padding(padding: EdgeInsets.only(left: 10),
+                    if (isLoggedIn) ...[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          Account.login,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _logout(context);
+                          },
+                          child: Text('Выйти'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.red,
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ] else ...[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
+                              context,
                               MaterialPageRoute(
                                 builder: (context) => const LogPage(),
                               ),
@@ -51,7 +94,7 @@ class UserPage extends StatelessWidget {
                           },
                           child: Text('Войти'),
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5), // Размер кнопки
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                             foregroundColor: Colors.blueGrey,
                             textStyle: TextStyle(
                               fontSize: 15,
@@ -60,32 +103,34 @@ class UserPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    Padding(padding: EdgeInsets.only(left: 10),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const RegForm(),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegForm(),
+                              ),
+                            );
+                          },
+                          child: Text('Регистрация'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                            foregroundColor: Colors.blueGrey,
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
                             ),
-                          );
-                        },
-                        child: Text('Регистрация'),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5), // Размер кнопки
-                          foregroundColor: Colors.blueGrey,
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                    ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
           Padding(
             padding: EdgeInsets.only(top: 10, left: 20, right: 20), // Отступы сверху и по бокам
             child: Align(
@@ -101,33 +146,30 @@ class UserPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextButton(onPressed: (){},
-                        child: Text('Заказы',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Text('Заказы',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
                     ),
-
                     Divider(color: Colors.white),
-
                     TextButton(onPressed: (){},
-                        child: Text('Возвраты',
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Text('Возвраты',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
                     ),
                     Divider(color: Colors.white,),
-
                     TextButton(onPressed: (){},
                       child: Text('Скидки',
                         style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
+                          fontSize: 17,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -154,32 +196,29 @@ class UserPage extends StatelessWidget {
                     TextButton(onPressed: (){},
                       child: Text('Отзывы',
                         style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
+                          fontSize: 17,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-
                     Divider(color: Colors.white),
-
                     TextButton(onPressed: (){},
                       child: Text('Настройки',
                         style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
+                          fontSize: 17,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
-
                 ),
               ),
             ),
           ),
-      ],
-    ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         height: 60,
         color: Colors.lightBlue,

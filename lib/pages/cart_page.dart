@@ -12,7 +12,13 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<int> quantities = List<int>.filled(products.length, 1);
+  List<int> quantities = [];
+
+  @override
+  void initState() {
+    super.initState();
+    quantities = List<int>.generate(Cart.items.length, (index) => 1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +27,9 @@ class _CartPageState extends State<CartPage> {
         title: Text('Корзина'),
       ),
       body: ListView.builder(
-        itemCount: 3,
+        itemCount: Cart.items.length,
         itemBuilder: (context, index) {
+          final cartItem = Cart.items[index];
           return Card(
             margin: EdgeInsets.all(10),
             child: Padding(
@@ -32,7 +39,7 @@ class _CartPageState extends State<CartPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      products[index].photo,
+                      cartItem.photo,
                       width: 100,
                       height: 100,
                       fit: BoxFit.cover,
@@ -44,10 +51,18 @@ class _CartPageState extends State<CartPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          products[index].name,
+                          cartItem.name,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          cartItem.cost,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
                           ),
                         ),
                         SizedBox(height: 10),
@@ -76,6 +91,17 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ],
                     ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      setState(() {
+                        Cart.items.removeAt(index);
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${cartItem.name} удален из корзины')),
+                      );
+                    },
                   ),
                 ],
               ),

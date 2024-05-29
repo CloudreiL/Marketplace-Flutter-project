@@ -15,7 +15,6 @@ class UserPage extends StatelessWidget {
     Account.email = "";
     Account.login = "";
     Account.password = "";
-    // Обновляем UI
     (context as Element).markNeedsBuild();
   }
 
@@ -85,7 +84,7 @@ class UserPage extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const LogPage(),
@@ -180,7 +179,7 @@ class UserPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10, left: 20, right: 20), // Отступы сверху и по бокам
+            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Align(
               alignment: Alignment.topCenter, // Выравнивание по верхнему центру
               child: Container(

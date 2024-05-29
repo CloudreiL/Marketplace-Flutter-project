@@ -3,7 +3,6 @@ import 'package:phone_project/pages/user_page.dart';
 import 'package:phone_project/pages/product_page.dart';
 import 'package:phone_project/pages/cart_page.dart';
 import 'package:phone_project/pages/fav_page.dart';
-
 import 'package:phone_project/components/classes.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,6 +54,9 @@ class _HomePageState extends State<HomePage> {
             child: GridView.builder(
               itemCount: filteredProducts.length,
               itemBuilder: (context, index) {
+                final product = filteredProducts[index];
+                bool isFavorite = Liked.items.any((item) => item.name == product.name);
+
                 return Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -108,6 +110,44 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        if (isFavorite) {
+                                          Liked.items.removeWhere((item) => item.name == product.name);
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text('${product.name} удален из избранного')),
+                                          );
+                                        } else {
+                                          Liked.items.add(LikedItem(product.name, product.cost, product.photo));
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text('${product.name} добавлен в избранное')),
+                                          );
+                                        }
+                                      });
+                                    },
+                                    icon: Icon(
+                                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                                      color: isFavorite ? Colors.red : Colors.grey,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        Cart.items.add(CartItem(product.name, product.cost, product.photo));
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('${product.name} добавлен в корзину')),
+                                        );
+                                      });
+                                    },
+                                    icon: Icon(Icons.shopping_basket_outlined),
+                                    color: Colors.blue,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -118,7 +158,7 @@ class _HomePageState extends State<HomePage> {
               },
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 300,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.6,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
               ),

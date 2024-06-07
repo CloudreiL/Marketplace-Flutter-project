@@ -1,7 +1,8 @@
-Made with Flutter
+##Made with Flutter
 
-Marketplace demo project
+#Marketplace demo project
 
+#Demonstration
 
-https://github.com/CloudreiL/Marketplace-Flutter-project/assets/124619046/42acbcbb-9504-45ca-ae82-ecee850a68d9
+![alt text](demo-1.gif)
 
